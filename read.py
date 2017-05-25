@@ -62,4 +62,4 @@ def getOneKey():
 
 if(action==55):#7 - Incomming
 print "Logging In..."
-print "Swipe your tag"
+print "Swipe your taga"
