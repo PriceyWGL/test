@@ -13,13 +13,6 @@ import termios
 
 continue_reading = True
 
-# Capture SIGINT for cleanup when the script is aborted
-def end_read(signal,frame):
-    global continue_reading
-    print "Ctrl+C captured, ending read."
-    continue_reading = False
-    GPIO.cleanup()
-
 # Hook the SIGINT
 signal.signal(signal.SIGINT, end_read)
 
@@ -73,7 +66,7 @@ def main():
     GPIO.cleanup()
     try:
         initGpio()
-        display.init()
+        #display.init()
         while True:
             #display.lcdWriteSecondLine("Choose an action...")
             #global displayTime
