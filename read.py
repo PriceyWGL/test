@@ -45,12 +45,7 @@ while continue_reading:
     # If we have the UID, continue
     if status == MIFAREReader.MI_OK:
 
-    # Print UID
-        print "Card read UID: "+str(uid[0])+","+str(uid[1])+","+str(uid[2])+","+str(uid[3])
-    now = datetime.datetime.now()
-    print now
-
-fd = sys.stdin.fileno()
+	fd = sys.stdin.fileno()
 old_settings = termios.tcgetattr(fd)
 def getOneKey():
     try:
@@ -63,3 +58,8 @@ def getOneKey():
 if(action==55):#7 - Incomming
     print "Logging In..."
     print "Swipe your taga"
+	
+    # Print UID
+    print "Card read UID: "+str(uid[0])+","+str(uid[1])+","+str(uid[2])+","+str(uid[3])
+    now = datetime.datetime.now()
+    print now
