@@ -45,11 +45,10 @@ def readNfc(action):
         #onScreen("Logging In...")
         #display.lcdWriteFirstLine("Prichod...")
         #display.lcdWriteSecondLine("Swipe your Card")
-		print "Logging In..."
-		print "Swipe your tag"
+        print "Logging In..."
+        print "Swipe your tag"
         cardId=read()
         logging.info("Incomming - %s",cardId)
-		
         #name = mysql.insertReading(cardId,Actions.incomming)
         #display.lcdWriteSecondLine(name)
     if(action==57):#9 - outcomming
