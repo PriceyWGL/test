@@ -37,7 +37,7 @@ while continue_reading:
 
     # If a card is found
     if status == MIFAREReader.MI_OK:
-    print "Card detected"
+        print "Card detected"
 
     # Get the UID of the card
     (status,uid) = MIFAREReader.MFRC522_Anticoll()
@@ -46,7 +46,7 @@ while continue_reading:
     if status == MIFAREReader.MI_OK:
 
     # Print UID
-    print "Card read UID: "+str(uid[0])+","+str(uid[1])+","+str(uid[2])+","+str(uid[3])
+        print "Card read UID: "+str(uid[0])+","+str(uid[1])+","+str(uid[2])+","+str(uid[3])
     now = datetime.datetime.now()
     print now
 
@@ -61,5 +61,5 @@ def getOneKey():
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
 
 if(action==55):#7 - Incomming
-print "Logging In..."
-print "Swipe your taga"
+    print "Logging In..."
+    print "Swipe your taga"
