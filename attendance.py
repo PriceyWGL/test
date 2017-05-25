@@ -42,41 +42,9 @@ def read():
 
 def readNfc(action):
     if(action==55):#7 - Incomming
-        #onScreen("Logging In...")
-        #display.lcdWriteFirstLine("Prichod...")
-        #display.lcdWriteSecondLine("Swipe your Card")
         print "Logging In..."
         print "Swipe your tag"
         cardId=read()
-        logging.info("Incomming - %s",cardId)
-        #name = mysql.insertReading(cardId,Actions.incomming)
-        #display.lcdWriteSecondLine(name)
-    if(action==57):#9 - outcomming
-        #onScreen("...")
-        #display.lcdWriteFirstLine("Logging out...")
-        #display.lcdWriteSecondLine("Swipe your Card")
-        cardId=read()
-        logging.info("Outcomming - %s",cardId)
-        #name = mysql.insertReading(cardId,Actions.outcomming)
-        #display.lcdWriteSecondLine(name)
-    if(action==49):#1 - break start
-       # onScreen("Zacatek pauzy...")
-        #display.lcdWriteFirstLine("Pauza zacatek...")
-        #display.lcdWriteSecondLine("Swipe your Card")
-        cardId=read()
-        logging.info("Break start - %s",cardId)
-        #name = mysql.insertReading(cardId,Actions.breakstart)
-       # display.lcdWriteSecondLine(name)
-    if(action==51):#3 - break end
-       # onScreen("Konec pauzy...")
-        #display.lcdWriteFirstLine("Pauza konec...")
-        #display.lcdWriteSecondLine("Swipe your Card")
-        cardId=read()
-        logging.info("Break end - %s",cardId)
-        #name = mysql.insertReading(cardId,Actions.breakend)
-        #display.lcdWriteSecondLine(name)
-
-    #Sleep a little, so the information about last action on display is readable by humans
     time.sleep(1)
 
 
