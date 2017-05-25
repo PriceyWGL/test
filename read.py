@@ -29,23 +29,31 @@ MIFAREReader = MFRC522.MFRC522()
 print "Welcome to the MFRC522 data read example"
 print "Press Ctrl-C to stop."
 
-# This loop keeps checking for chips. If one is near it will get the UID and authenticate
-while continue_reading:
-    
-    # Scan for cards    
-    (status,TagType) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
+def readNfc():
+    reading = True
+    while reading:
+        MIFAREReader = MFRC522.MFRC522()
 
-    # If a card is found
-    if status == MIFAREReader.MI_OK:
-        print "Card detected"
+        #while continue_reading:
+        (status,TagType) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
 
-    # Get the UID of the card
-    (status,uid) = MIFAREReader.MFRC522_Anticoll()
+        #if status == MIFAREReader.MI_OK:
+        #    print("Card detected")
 
-    # If we have the UID, continue
-    if status == MIFAREReader.MI_OK:
+        (status,backData) = MIFAREReader.MFRC522_Anticoll()
+        if status == MIFAREReader.MI_OK:
+            #print ("Card Number: "+str(backData[0])+","+str(backData[1])+","+str(backData[2])+","+str(backData[3])+","+str(backData[4]))
+            MIFAREReader.AntennaOff()
+            reading=False
+            return str(backData[0])+str(backData[1])+str(backData[2])+str(backData[3])+str(backData[4])
 
-	fd = sys.stdin.fileno()
+def readNfc(action):
+    if(action==55):#7 - Incomming
+        print "Card read UID: "+str(uid[0])+","+str(uid[1])+","+str(uid[2])+","+str(uid[3])
+        now = datetime.datetime.now()
+        print now
+
+fd = sys.stdin.fileno()
 old_settings = termios.tcgetattr(fd)
 def getOneKey():
     try:
@@ -55,11 +63,28 @@ def getOneKey():
     finally:
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
 
-if(action==55):#7 - Incomming
-    print "Logging In..."
-    print "Swipe your taga"
-	
-    # Print UID
-    print "Card read UID: "+str(uid[0])+","+str(uid[1])+","+str(uid[2])+","+str(uid[3])
-    now = datetime.datetime.now()
-    print now
+def initGpio():
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(8, GPIO.OUT)
+    GPIO.setup(13, GPIO.OUT)
+
+def main():
+    GPIO.cleanup()
+    try:
+        initGpio()
+        display.init()
+        while True:
+            #display.lcdWriteSecondLine("Choose an action...")
+            #global displayTime
+            #displayTime=true
+            #Start new thread to show curent datetime on display
+            # and wait for user input on keyboard
+            #thr = thread.start_new_thread(printDateToDisplay, ())
+            a = getOneKey()
+            #displayTime=False
+            if 47 < a < 58:
+                readNfc(a)
+    except KeyboardInterrupt:
+        GPIO.cleanup()
+        pass
+    GPIO.cleanup()
