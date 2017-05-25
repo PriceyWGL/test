@@ -9,6 +9,7 @@ import time
 import datetime
 import urllib2
 import urllib
+import termios
 
 continue_reading = True
 
