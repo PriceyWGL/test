@@ -51,13 +51,10 @@ def NFCRead():
 # This loop keeps checking for chips. If one is near it will get the UID and authenticate
 while continue_reading:
     
-    # Scan for cards    
-
-	
     inkey = raw_input()
     if inkey == "1":
+        print "Clocking In - Please Present Card"
+        time.sleep(3)
         NFCRead()
-        print "clocking in"
     else:
         print "Please select 1 to clock in"
-
