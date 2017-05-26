@@ -30,6 +30,8 @@ print "Welcome to the MFRC522 data read example"
 print "Press Ctrl-C to stop."
 
 def NFCRead():
+
+    (status,TagType) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
 	
     # If a card is found
     if status == MIFAREReader.MI_OK:
@@ -50,7 +52,7 @@ def NFCRead():
 while continue_reading:
     
     # Scan for cards    
-    (status,TagType) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
+
 	
     inkey = raw_input()
     if inkey == "a":
