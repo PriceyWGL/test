@@ -76,10 +76,10 @@ while continue_reading:
     if inkey == "1":
         print "Clocking In - Please Present Card"
         time.sleep(3)
-        NFCRead()
+        NFCReadIn()
     elif inkey == "2":
         print "Clocking Out - Please Present Card"
         time.sleep(3)
-        NFCReadIn()
+        NFCReadOut()
     else:
         print "Please select 1 to clock in"
