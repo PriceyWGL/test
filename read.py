@@ -35,7 +35,7 @@ def NFCRead():
 	
     # If a card is found
     if status == MIFAREReader.MI_OK:
-        print "Card detected"
+        #print "Card detected"
     
     # Get the UID of the card
     (status,uid) = MIFAREReader.MFRC522_Anticoll()
@@ -44,9 +44,13 @@ def NFCRead():
     if status == MIFAREReader.MI_OK:
 
         # Print UID
-        print "Card read UID: "+str(uid[0])+","+str(uid[1])+","+str(uid[2])+","+str(uid[3])
+        #print "Card read UID: "+str(uid[0])+","+str(uid[1])+","+str(uid[2])+","+str(uid[3])
         now = datetime.datetime.now()
         print now
+		print "Thank you for clocking in."
+		
+	else:
+	    print "Card not detected, please try again"
 
 # This loop keeps checking for chips. If one is near it will get the UID and authenticate
 while continue_reading:
@@ -55,8 +59,9 @@ while continue_reading:
 
 	
     inkey = raw_input()
-    if inkey == "a":
+    if inkey == "1":
         NFCRead()
+		print "clocking in"
     else:
-        print "Please select A to clock in"
+        print "Please select 1 to clock in"
 
