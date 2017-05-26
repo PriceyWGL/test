@@ -1,4 +1,5 @@
 import nfc
+import display
 
 import sys
 import tty
@@ -133,7 +134,6 @@ def initGpio():
     GPIO.setup(13, GPIO.OUT)
 
 def main():
-    GPIO.cleanup()
     try:
         initGpio()
         display.init()
