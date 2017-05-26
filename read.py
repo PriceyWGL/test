@@ -29,12 +29,8 @@ MIFAREReader = MFRC522.MFRC522()
 print "Welcome to the MFRC522 data read example"
 print "Press Ctrl-C to stop."
 
-# This loop keeps checking for chips. If one is near it will get the UID and authenticate
-while continue_reading:
-    
-    # Scan for cards    
-    (status,TagType) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
-
+def NFCRead():
+	
     # If a card is found
     if status == MIFAREReader.MI_OK:
         print "Card detected"
@@ -49,3 +45,16 @@ while continue_reading:
         print "Card read UID: "+str(uid[0])+","+str(uid[1])+","+str(uid[2])+","+str(uid[3])
         now = datetime.datetime.now()
         print now
+
+# This loop keeps checking for chips. If one is near it will get the UID and authenticate
+while continue_reading:
+    
+    # Scan for cards    
+    (status,TagType) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
+	
+    inkey = raw_input()
+    if inkey == "a":
+        NFCRead()
+    else:
+        print "Please select A to clock in"
+
