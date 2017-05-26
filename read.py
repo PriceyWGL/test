@@ -48,6 +48,9 @@ def NFCReadIn():
         now = datetime.datetime.now()
         print "you clocked in at:"
         print now
+        fh = open("/attendance.txt", "a")
+        fh.write("{};{};{};\n".format( now.strftime('%s'))
+        fh.close
 		
 def NFCReadOut():
 
