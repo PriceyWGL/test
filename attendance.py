@@ -1,4 +1,5 @@
 import nfc
+import display
 
 import sys
 import tty
