@@ -13,6 +13,12 @@ import termios
 
 continue_reading = True
 
+class Actions:
+    incomming=1
+    outcomming=2
+    breakstart=3
+    breakend=4
+
 # Hook the SIGINT
 #signal.signal(signal.SIGINT, end_read)
 
@@ -22,6 +28,10 @@ MIFAREReader = MFRC522.MFRC522()
 # Welcome message
 print "Welcome to the MFRC522 data read example"
 print "Press Ctrl-C to stop."
+
+def read():
+    cardId=nfc.readNfc()
+    return cardId
 
 def readNfc():
     reading = True
