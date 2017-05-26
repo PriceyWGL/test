@@ -89,6 +89,6 @@ def main():
             if 47 < a < 58:
                 readNfc(a)
     except KeyboardInterrupt:
-        #GPIO.cleanup()
+        GPIO.cleanup()
         pass
-    #GPIO.cleanup()
+    GPIO.cleanup()
