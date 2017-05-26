@@ -26,10 +26,10 @@ signal.signal(signal.SIGINT, end_read)
 MIFAREReader = MFRC522.MFRC522()
 
 # Welcome message
-print "Welcome to the MFRC522 data read example"
-print "Press Ctrl-C to stop."
+print "Press 1 to Clock in"
+print "Press 2 to Clock out"
 
-def NFCRead():
+def NFCReadIn():
 
     (status,TagType) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
 	
@@ -48,6 +48,26 @@ def NFCRead():
         now = datetime.datetime.now()
         print "you clocked in at:"
         print now
+		
+def NFCReadOut():
+
+    (status,TagType) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
+	
+    # If a card is found
+    if status == MIFAREReader.MI_OK:
+        print "Card detected"
+    else:
+        print "Card not detected"
+    # Get the UID of the card
+    (status,uid) = MIFAREReader.MFRC522_Anticoll()
+
+    # If we have the UID, continue
+    if status == MIFAREReader.MI_OK:
+        # Print UID
+        #print "Card read UID: "+str(uid[0])+","+str(uid[1])+","+str(uid[2])+","+str(uid[3])
+        now = datetime.datetime.now()
+        print "you clocked out at:"
+        print now
 
 # This loop keeps checking for chips. If one is near it will get the UID and authenticate
 while continue_reading:
@@ -57,5 +77,9 @@ while continue_reading:
         print "Clocking In - Please Present Card"
         time.sleep(3)
         NFCRead()
+    elif inkey == "2":
+        print "Clocking Out - Please Present Card"
+        time.sleep(3)
+        NFCReadIn()
     else:
         print "Please select 1 to clock in"
