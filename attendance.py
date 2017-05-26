@@ -128,11 +128,6 @@ def printDateToDisplay():
         print (time.strftime("%d.%m. %H:%M:%S", time.localtime()))
         time.sleep(1)
 
-def initGpio():
-    GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(8, GPIO.OUT)
-    GPIO.setup(13, GPIO.OUT)
-
 def main():
     try:
         initGpio()
@@ -149,9 +144,9 @@ def main():
             if 47 < a < 58:
                 readNfc(a)
     except KeyboardInterrupt:
-        GPIO.cleanup()
+        #GPIO.cleanup()
         pass
-    GPIO.cleanup()
+    #GPIO.cleanup()
 
 if __name__ == '__main__':
     debug("----------========== Starting session! ==========----------")
