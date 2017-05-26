@@ -1,5 +1,4 @@
 import nfc
-import display
 
 import sys
 import tty
@@ -39,12 +38,12 @@ def read():
 def readNfc(action):
     if(action==55):#7 - Incomming
         print "Logging In..."
-        #display.lcdWriteFirstLine("Prichod...")
-        #display.lcdWriteSecondLine("Swipe your Card")
+        display.lcdWriteFirstLine("Prichod...")
+        display.lcdWriteSecondLine("Swipe your Card")
         cardId=read()
-        #logging.info("Incomming - %s",cardId)
-        #name = mysql.insertReading(cardId,Actions.incomming)
-        #display.lcdWriteSecondLine(name)
+        logging.info("Incomming - %s",cardId)
+        name = mysql.insertReading(cardId,Actions.incomming)
+        display.lcdWriteSecondLine(name)
     if(action==57):#9 - outcomming
         onScreen("...")
         display.lcdWriteFirstLine("Logging out...")
@@ -125,15 +124,22 @@ def printDateToDisplay():
         #Display current time on display, until global variable is set
         if displayTime!=True:
             thread.exit()
-        print (time.strftime("%d.%m. %H:%M:%S", time.localtime()))
+        display.lcdWriteFirstLine(time.strftime("%d.%m. %H:%M:%S", time.localtime()))
+        onScreen(time.strftime("%d.%m.%Y %H:%M:%S", time.localtime()))
         time.sleep(1)
 
+def initGpio():
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(8, GPIO.OUT)
+    GPIO.setup(13, GPIO.OUT)
+
 def main():
+    GPIO.cleanup()
     try:
         initGpio()
         display.init()
         while True:
-            print "Choose an action..."
+            display.lcdWriteSecondLine("Choose an action...")
             global displayTime
             displayTime=true
             #Start new thread to show curent datetime on display
@@ -144,9 +150,9 @@ def main():
             if 47 < a < 58:
                 readNfc(a)
     except KeyboardInterrupt:
-        #GPIO.cleanup()
+        GPIO.cleanup()
         pass
-    #GPIO.cleanup()
+    GPIO.cleanup()
 
 if __name__ == '__main__':
     debug("----------========== Starting session! ==========----------")
